@@ -1,7 +1,12 @@
+'''This module handles a d66 roll, conversion of numbers to Traveller
+letternumbers and back, and generates random character stats, returning
+a list or a string, depending on your preference.'''
+
+# Python 3.x
+
 from random import randint
 
-_letternumbers = '0123456789ABCDEF'
-
+letternumbers = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ'
 
 def rd6():
     return randint(1,6)
@@ -12,58 +17,52 @@ def r2d6():
 def rd66():
     return rd6() * 10 + rd6()
 
-def coinflip():
-    return randint(1,100) > 50
+def letter_to_number(letter):
+    '''Returns the number corresponding to a Traveller numberletter.
+    This includes 0 through 9.'''
+    assert len(letter) == 1, 'Single letter required.'
+    letter = letter.upper()
+    out = letternumbers.find(letter)
+    assert out != -1, 'Unknown character requested for translation.'
+    return out
 
+def number_to_letter(num):
+    return letternumbers[num]
 
-class Char:
-    def __init__(self):
-        self.gen_random()
+def numbers_to_letters(numbers):
+    '''Returns a string of all numbers converted to characters.'''
+    out = ''
+    for n in map(number_to_letter, numbers):
+        out += n
+    return out
     
-    def gen_random(self):
-        self.str = r2d6()
-        self.dex = r2d6()
-        self.end = r2d6()
-        self.int = r2d6()
-        self.edu = r2d6()
-        self.soc = r2d6()
-        
-    def report(self):
-        statstr = _letternumbers[self.str]
-        statstr += _letternumbers[self.dex]
-        statstr += _letternumbers[self.end]
-        statstr += _letternumbers[self.int]
-        statstr += _letternumbers[self.edu]
-        statstr += _letternumbers[self.soc]
+def chargen():
+    '''Returns list of six random 2d6 rolls.'''
+    stats = []
+    for x in range(6):
+        stats.append(r2d6())
+    return stats
 
-        return statstr
+def chargen_str():
+    '''Returns string of Traveller letternumbers for six 2d6 rolls.'''
+    return numbers_to_letters(chargen())
 
-def testchar():
-    c = Char()
-    print(c.report())
 
-def dicerolls():
-    print(f'Character Gen: {Char().report()}\n')
-    print('Coin Flips: ', end='')
-    for x in range(10):
-        print(coinflip(), end=', ')
-    print('\n')
+def test():
+    for x in range(50):
+        print(rd66(), end=', ')
+    print()
 
-    print('1d6: ', end='')
-    for x in range(30):
-        print(rd6(), end=',')
-    print('\n')
+    print(number_to_letter(10))
+    print(number_to_letter(12))
+    print(number_to_letter(20))
+    print(number_to_letter(33))
+    print(letter_to_number('z'))
     
-    print('2d6: ', end='')
-    for x in range(20):
-        print(r2d6(), end=',')
-    print('\n')
+    print(letter_to_number('a'))
 
-    print('d66: ', end='')
-    for x in range(20):
-        print(rd66(), end=',')
-    print('\n')
+    print(chargen())
+    print(chargen_str())
 
 if __name__ == '__main__':
-    dicerolls()
-
+    test()
