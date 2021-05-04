@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
+
 '''This module handles a d66 roll, conversion of numbers to Traveller
 letternumbers and back, and generates random character stats, returning
-a list or a string, depending on your preference.'''
-
-# Python 3.x
+a list or a string, depending on your preference.
+It also rolls d6, 2d6, and does 1/3 and 1/2 checks.'''
 
 from random import randint
 
@@ -16,6 +17,14 @@ def r2d6():
 
 def rd66():
     return rd6() * 10 + rd6()
+
+def one_third():
+    '''Returns success or failure for a 1/3 check.'''
+    return randint(1,3) == 1
+
+def coin_toss():
+    '''Returns success or failure for a 1/2 check.'''
+    return randint(1,2) == 1
 
 def letter_to_number(letter):
     '''Returns the number corresponding to a Traveller numberletter.
@@ -64,5 +73,17 @@ def test():
     print(chargen())
     print(chargen_str())
 
+    heads = 0
+    for x in range(100):
+        if coin_toss():
+            heads += 1
+    print(f'Heads (out of 100): {heads}')
+    
+    heads = 0
+    for x in range(1000):
+        if one_third():
+            heads += 1
+    print(f'One-Third successful checks (out of 1000): {heads}')
+    
 if __name__ == '__main__':
     test()
