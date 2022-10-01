@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''Converts between letters and numbers for Traveller, when referring to
-numbers in letter form.'''
+numbers in letter form. '''
 
 ordered_numbers_string = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ'
 
