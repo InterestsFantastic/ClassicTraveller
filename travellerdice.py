@@ -23,12 +23,11 @@ def numbers_to_letters(numbers):
         out += n
     return out
 
-def letters_to_numbers(numbers):
-    assert False, 'not done'
+def letters_to_numbers(letters):
     '''Returns a string of all numbers converted to characters.'''
-    out = ''
-    for n in map(number_to_letter, numbers):
-        out += n
+    out = []
+    for n in map(letter_to_number, letters):
+        out.append(n)
     return out
 
 assert letter_to_number('c') == 12
@@ -38,3 +37,4 @@ assert letter_to_number('0') == 0
 assert number_to_letter(12) == 'C'
 assert number_to_letter(17) == 'H'
 assert numbers_to_letters([7,10,5,12,6,3]) == '7A5C63'
+assert letters_to_numbers('7A5C63') == [7,10,5,12,6,3]
