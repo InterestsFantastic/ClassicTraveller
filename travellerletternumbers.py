@@ -33,8 +33,6 @@ def letters_to_numbers(letters):
 assert letter_to_number('c') == 12
 assert letter_to_number('C') == 12
 assert letter_to_number('3') == 3
-assert letter_to_number('0') == 0
 assert number_to_letter(12) == 'C'
-assert number_to_letter(17) == 'H'
 assert numbers_to_letters([7,10,5,12,6,3]) == '7A5C63'
 assert letters_to_numbers('7A5C63') == [7,10,5,12,6,3]
