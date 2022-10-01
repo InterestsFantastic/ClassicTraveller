@@ -14,6 +14,7 @@ def letter_to_number(letter):
     return out
 
 def number_to_letter(num):
+    '''Returns the Traveller numberletter corresponding to a number.'''
     return ordered_numbers_string[num]
 
 def numbers_to_letters(numbers):
@@ -24,7 +25,7 @@ def numbers_to_letters(numbers):
     return out
 
 def letters_to_numbers(letters):
-    '''Returns a string of all numbers converted to characters.'''
+    '''Returns a list of numbers parsed from string of Traveller letternumbers.'''
     out = []
     for n in map(letter_to_number, letters):
         out.append(n)
